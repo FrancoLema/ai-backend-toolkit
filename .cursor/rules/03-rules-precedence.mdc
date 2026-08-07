@@ -1,0 +1,90 @@
+---
+description: Defines the precedence and discovery order for engineering rules.
+alwaysApply: true
+---
+
+# Rule Precedence
+
+Before starting any task, inspect the project for existing engineering guidelines.
+
+**Project-specific rules must always take precedence over this toolkit.**
+
+This toolkit provides **default engineering standards** and should only be used when the current project does not define its own rules.
+
+Never ignore or override project-specific conventions.
+
+---
+
+# Rule Discovery
+
+Before making any implementation decision, search for project-specific engineering rules.
+
+Look for files such as:
+
+- `.cursor/rules/`
+- `AGENTS.md`
+- `CLAUDE.md`
+- `.github/copilot-instructions.md`
+- `CONTRIBUTING.md`
+- `README.md` (only if it contains engineering or development conventions)
+
+If project-specific engineering rules are found:
+
+- Read them before starting the task.
+- Follow them consistently throughout the implementation.
+- Ignore conflicting rules from this toolkit.
+
+If no project-specific engineering rules exist:
+
+- Use the rules provided by this toolkit as the default engineering guidelines.
+
+---
+
+# Rule Priority
+
+Always follow rules in the following order:
+
+1. User instructions
+2. Project-specific engineering rules
+3. AI Backend Toolkit rules
+4. Framework and language conventions
+5. Model defaults
+
+If two rules conflict, the rule with the highest priority always wins.
+
+---
+
+# Project Awareness
+
+Before making architectural or implementation decisions:
+
+- Inspect the project structure.
+- Understand the existing architecture.
+- Identify the project's coding style.
+- Reuse existing components whenever possible.
+- Adapt to the project's conventions instead of introducing new ones.
+
+Consistency with the existing project is more important than applying generic best practices.
+
+---
+
+# Consistency
+
+Once project conventions have been identified:
+
+- Follow them consistently.
+- Do not mix different coding styles.
+- Do not replace project patterns with personal preferences.
+- Prefer consistency over theoretical improvements.
+
+---
+
+# Default Behavior
+
+This toolkit is designed to provide sensible defaults.
+
+It should complement existing engineering standards, **never replace them**.
+
+If project-specific engineering rules exist, **always use those rules**.
+
+Only when no project-specific rules can be found should the AI Backend Toolkit rules become the default engineering guidelines.

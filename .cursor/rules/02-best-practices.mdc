@@ -1,0 +1,127 @@
+---
+description: General backend engineering best practices.
+alwaysApply: true
+---
+
+# Backend Engineering Best Practices
+
+These guidelines define the expected engineering standards for all code changes.
+
+---
+
+# General Principles
+
+- Prioritize correctness, simplicity, and maintainability.
+- Follow the existing project conventions.
+- Write code that is easy to understand before optimizing it.
+- Prefer explicit code over clever solutions.
+- Keep implementations focused on a single responsibility.
+- Avoid unnecessary abstractions.
+- Follow the SOLID, KISS, DRY, and YAGNI principles.
+
+---
+
+# Architecture
+
+- Respect the existing architecture of the project.
+- Keep business logic independent from infrastructure.
+- Separate responsibilities clearly between layers.
+- Prefer composition over inheritance.
+- Depend on abstractions rather than concrete implementations.
+- Avoid tight coupling between modules.
+- Reuse existing components before creating new ones.
+
+---
+
+# Code Organization
+
+- Keep files and modules focused on a single purpose.
+- Keep functions small and cohesive.
+- Use descriptive names for variables, functions, and classes.
+- Eliminate duplicated logic whenever practical.
+- Search for existing implementations before creating new functions, classes, or utilities.
+- Prefer extending existing components over introducing parallel implementations.
+- Avoid deep nesting by using early returns.
+
+---
+
+# Python
+
+- Follow PEP 8.
+- Use type hints for all function parameters and return values.
+- Prefer explicit types over `Any` whenever possible.
+- Prefer dataclasses or Pydantic models over unstructured dictionaries when appropriate.
+- Raise explicit exceptions instead of returning ambiguous values.
+- Avoid mutable default arguments.
+- Prefer context managers for resource management.
+- Avoid global mutable state.
+
+---
+
+# Error Handling
+
+- Validate external inputs.
+- Fail explicitly rather than silently ignoring errors.
+- Return meaningful error messages.
+- Never swallow exceptions without justification.
+
+---
+
+# Performance
+
+- Prioritize readability before optimization.
+- Avoid unnecessary database queries.
+- Reuse existing data instead of repeating expensive operations.
+- Measure performance before optimizing.
+- Avoid premature optimization.
+
+---
+
+# Security
+
+- Never hardcode secrets or credentials.
+- Validate and sanitize external input.
+- Apply the principle of least privilege.
+- Avoid exposing sensitive information in logs or errors.
+
+---
+
+# Testing
+
+- Every new behavior should be testable.
+- Prefer deterministic tests.
+- Test behavior rather than implementation details.
+- Cover edge cases and error scenarios.
+- Mock only external dependencies.
+- Keep tests simple, isolated, and readable.
+
+---
+
+# Documentation
+
+- Document architectural decisions when they are not obvious.
+- Keep README files up to date when behavior changes.
+- Explain why when the intent is not obvious from the code.
+- Avoid comments that simply repeat what the code already expresses.
+
+---
+
+# Consistency
+
+When multiple valid implementations exist:
+
+- Prefer the solution that is most consistent with the existing codebase.
+- Match existing naming conventions, patterns, and project structure.
+- Avoid introducing a different style unless explicitly requested.
+
+---
+
+# Definition of Quality
+
+Before considering a task complete, verify that:
+
+- The implementation satisfies the requested requirements.
+- No unrelated behavior was modified.
+- The solution is consistent with the existing codebase.
+- The code is readable and maintainable.
+- Appropriate tests have been added or updated.
