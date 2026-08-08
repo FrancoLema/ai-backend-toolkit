@@ -1,249 +1,214 @@
 # AI Backend Toolkit
 
-> An opinionated AI toolkit for backend engineers that provides reusable workflows, engineering rules, and development commands for AI coding assistants such as Cursor.
+> A structured AI-assisted development workflow for backend engineers.
 
-## Overview
+AI Backend Toolkit provides a guided workflow for taking a software requirement from initial analysis to implementation and review.
 
-AI Backend Toolkit is designed to make AI-assisted software development more predictable, structured, and aligned with engineering best practices.
-
-Instead of asking an AI assistant to immediately generate code, this toolkit guides the development process through a series of reusable workflows that mimic how experienced backend engineers approach a feature.
-
-The toolkit encourages:
-
-* Requirement analysis before implementation
-* Small and focused changes
-* Incremental development
-* Architecture-first thinking
-* Test-driven reasoning
-* Consistent engineering practices
+It is designed for AI coding assistants such as Cursor, with a focus on **clarity, simplicity, scope control, and sound engineering practices**.
 
 ---
 
-# Philosophy
+## Philosophy
 
-Large Language Models are excellent at generating code, but they often:
+AI coding assistants can generate code quickly, but they can also make assumptions, expand scope, overengineer solutions, or modify unrelated parts of a codebase.
 
-* Implement more than requested
-* Make assumptions about business requirements
-* Introduce unnecessary abstractions
-* Modify unrelated files
-* Refactor working code without being asked
-
-This toolkit aims to reduce those behaviors by introducing a structured workflow and a consistent set of engineering rules.
-
-The objective is simple:
-
-> **Think first. Code second.**
-
----
-
-# Development Workflow
-
-Every implementation follows the same pipeline.
+AI Backend Toolkit introduces a structured workflow:
 
 ```text
 Requirement
-      │
-      ▼
- Analyze
-      │
-      ▼
- Create Issues
-      │
-      ▼
- Implementation Plan
-      │
-      ▼
- Implement
-      │
-      ▼
- Test Plan
-      │
-      ▼
- Testing
-      │
-      ▼
- Review
-      │
-      ▼
- Documentation
+    ↓
+/analyze-requirement
+    ↓
+/structure-issue
+    ↓
+/plan-implementation
+    ↓
+/create-tests
+    ↓
+Implementation
+    ↓
+/review (optional)
 ```
 
-Each stage has a single responsibility and produces an artifact that can be used by the next stage.
+Each stage has a specific responsibility and acts as a gate for the next one.
+
+The AI **does not automatically execute the next command**. When a stage is complete, it recommends the next step and the developer decides whether to continue.
+
+The core principle is:
+
+> **Understand first. Plan second. Implement third.**
 
 ---
 
-# Commands
+## Commands
 
-## Analyze
+| Command                | Purpose                                                                          |
+| ---------------------- | -------------------------------------------------------------------------------- |
+| `/analyze-requirement` | Analyze and clarify the requirement from a product/functional perspective.       |
+| `/structure-issue`     | Transform the validated requirement into a well-scoped engineering issue.        |
+| `/plan-implementation` | Create a simple, implementation-ready technical plan based on the real codebase. |
+| `/create-tests`        | Define the test strategy and scenarios required to validate the implementation.  |
+| `/review`              | Perform an independent, critical review of the implemented changes.              |
+| `/docs`                | Update relevant documentation when necessary.                                    |
 
-Analyzes a requirement before writing code.
-
-Responsibilities:
-
-* Understand the problem
-* Identify ambiguities
-* Detect risks
-* Identify dependencies
-* Produce acceptance criteria
-* Estimate implementation complexity
-
-This command intentionally does **not** generate code.
+`/review` is an optional step and is not part of the mandatory workflow.
 
 ---
 
-## Issues
+## Rules
 
-Transforms the analysis into a structured implementation backlog.
+The toolkit provides three default Cursor rules:
 
-Each issue contains:
+```text
+.cursor/rules/
+├── 00-agent-behavior.mdc
+├── 01-best-practices.mdc
+└── 99-rule-precedence.mdc
+```
 
-* Objective
-* Description
-* Definition of Done
-* Dependencies
-* Estimated affected modules
+### Project Rules
 
----
+Project-specific rules always have priority over toolkit rules.
 
-## Implementation
+Before working on a project, the AI should inspect its existing rules and conventions.
 
-Creates a complete implementation strategy before coding.
+If project-specific rules exist, they are used.
 
-Typical output includes:
+If no project-specific rules are found, the toolkit rules become the default.
 
-* Architecture impact
-* Domain changes
-* Persistence changes
-* API changes
-* Migration considerations
-* Rollback strategy
-* Observability requirements
-* Recommended implementation order
+This allows the toolkit to adapt to existing projects instead of imposing its own architecture or conventions.
 
 ---
 
-## Tests
+## Installation
 
-Generates a testing strategy.
+Clone the repository:
 
-Instead of immediately writing tests, it first identifies:
+```bash
+git clone https://github.com/FrancoLema/ai-backend-toolkit.git
+```
 
-* Unit tests
-* Integration tests
-* Edge cases
-* Regression scenarios
-* Performance considerations
-* Security validations
+Enter the toolkit directory:
 
----
+```bash
+cd ai-backend-toolkit
+```
 
-## Review
+Grant permissions to the installer
+```bash
+chmod +x install.sh
+```
 
-Performs a senior-level review after implementation.
+Install it into an existing project:
 
-The review evaluates:
+```bash
+./install.sh /path/to/your/project
+```
 
-* Architecture
-* Readability
-* Maintainability
-* Performance
-* SOLID compliance
-* Potential bugs
-* Code duplication
-* Naming consistency
-* Test quality
+Or install it into the current directory:
 
----
+```bash
+./install.sh .
+```
 
-## Documentation
+The installer creates:
 
-Generates project documentation when necessary.
+```text
+your-project/
+└── .cursor/
+    ├── commands/
+    │   ├── analyze-requirement.md
+    │   ├── structure-issue.md
+    │   ├── plan-implementation.md
+    │   ├── create-tests.md
+    │   ├── review.md
+    │   └── docs.md
+    │
+    └── rules/
+        ├── 00-agent-behavior.mdc
+        ├── 01-best-practices.mdc
+        └── 99-rule-precedence.mdc
+```
 
-Examples:
-
-* README updates
-* Architecture Decision Records (ADR)
-* API documentation
-* Implementation notes
-
----
-
-# Engineering Rules
-
-The toolkit includes a reusable set of engineering rules that guide AI assistants during implementation.
-
-These rules focus on:
-
-* SOLID principles
-* Clean Architecture
-* Python best practices
-* Testing
-* Security
-* Performance
-* Documentation
-* AI behavior
-
-The goal is not to replace project conventions, but to provide sensible defaults.
+The installer preserves project-specific rule files.
 
 ---
 
-# Rule Precedence
+## Usage
 
-The toolkit always respects project-specific conventions.
+Open the target project with Cursor after installation.
 
-Rules are applied using the following priority:
+Start with a requirement:
 
-1. User instructions
-2. Project-specific rules
-3. AI Backend Toolkit rules
-4. Framework conventions
-5. Model defaults
+```text
+/analyze-requirement
+```
 
-If a project already provides its own engineering guidelines (such as Cursor Rules, AGENTS.md, or similar files), those rules take precedence over this toolkit.
+Once the requirement is sufficiently defined, Cursor will recommend:
 
----
+```text
+/structure-issue
+```
 
-# Design Principles
+The workflow continues through:
 
-The toolkit follows a few fundamental principles.
+```text
+/plan-implementation
+/create-tests
+```
 
-* Implement only what was requested.
-* Never introduce unnecessary features.
-* Prefer simple solutions.
-* Keep changes small and incremental.
-* Avoid modifying unrelated files.
-* Preserve existing architecture whenever possible.
-* Ask questions when requirements are ambiguous.
-* Prefer readability over cleverness.
-* Think before generating code.
+After the implementation is completed, optionally run:
 
----
+```text
+/review
+```
 
-# Goals
-
-* Improve consistency in AI-assisted development
-* Reduce unnecessary code generation
-* Encourage architecture-first thinking
-* Produce maintainable implementations
-* Standardize backend engineering workflows
-* Make AI behave more like an experienced backend engineer
+The review focuses on the actual changes introduced by the implementation, preferably using the relevant Git commit and its diff.
 
 ---
 
-# Roadmap
+## Design Principles
 
-Future improvements may include:
+AI Backend Toolkit follows a few simple principles:
 
-* Support for additional AI coding assistants
-* Framework-specific engineering rules
-* Language-specific workflows
-* Project templates
-* Automated installation
-* Community-contributed rules
+* Keep the scope explicit.
+* Do only what is required.
+* Prefer the simplest correct solution.
+* Avoid overengineering.
+* Respect the existing architecture.
+* Reuse existing project patterns.
+* Never invent requirements.
+* Do not modify unrelated code.
+* Keep the developer in control.
 
 ---
 
-# License
+## Project Structure
 
-This project is released under the MIT License.
+```text
+ai-backend-toolkit/
+│
+├── README.md
+├── LICENSE
+├── install.sh
+│
+└── .cursor/
+    ├── commands/
+    │   ├── analyze-requirement.md
+    │   ├── structure-issue.md
+    │   ├── plan-implementation.md
+    │   ├── create-tests.md
+    │   ├── review.md
+    │   └── docs.md
+    │
+    └── rules/
+        ├── 00-agent-behavior.mdc
+        ├── 01-best-practices.mdc
+        └── 99-rule-precedence.mdc
+```
+
+---
+
+## License
+
+MIT
